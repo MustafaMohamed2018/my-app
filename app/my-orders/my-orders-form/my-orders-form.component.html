@@ -1,0 +1,125 @@
+<div class="col-6">
+<form #form="ngForm" (ngSubmit)="updateOrder(form)" *ngIf="order">
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Full Name</label>
+
+      <input minlength="12" required ngModel [(ngModel)]="order.info.fullName" #fullName="ngModel" name="fullName" type="text" class="form-control" id="inputEmail4" placeholder="Full Name">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Email</label>
+      <input [(ngModel)]="order.info.email" minlength="10" required ngModel #email="ngModel" name="email" type="email" class="form-control" id="inputEmail4" placeholder="Email">
+ 	</div>
+
+	<div class="row no-gutters" style=" width: 100%;">
+	 	<div *ngIf="fullName.touched && !fullName.valid" class="col" style="margin-right:1.5%">
+			<div *ngIf="fullName.errors.required" class="alert alert-danger" role="alert">
+			  This Field Is Required
+			</div>
+
+			<div *ngIf="fullName.errors.minlength" class="alert alert-danger" role="alert">
+			  This Field Require {{fullName.errors.minlength.requiredLength - fullName.errors.minlength.actualLength}}
+			</div>
+		</div>
+
+		<div *ngIf="email.touched && !email.valid" class="col" style="margin-left:1.5%">
+			<div *ngIf="email.errors.required" class="alert alert-danger" role="alert">
+			  This Field Is Required
+			</div>
+
+			<div *ngIf="email.errors.minlength" class="alert alert-danger" role="alert">
+			  This Field Require {{email.errors.minlength.requiredLength - email.errors.minlength.actualLength}}
+			</div>
+		</div>
+	</div>
+
+  </div>
+
+
+  <div class="form-group">
+    <label for="inputAddress">Address</label>
+    <input [(ngModel)]="order.info.address" minlength="7" required ngModel #address="ngModel" name="address" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+  </div>
+
+  <div *ngIf="address.touched && !address.valid">
+		<div *ngIf="address.errors.required" class="alert alert-danger" role="alert">
+		  This Field Is Required
+		</div>
+
+		<div *ngIf="address.errors.minlength" class="alert alert-danger" role="alert">
+		  This Field Require {{address.errors.minlength.requiredLength - address.errors.minlength.actualLength}}
+		</div>
+	</div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input [(ngModel)]="order.info.city" minlength="10" required ngModel #city="ngModel" name="city" type="text" class="form-control" id="inputCity">
+    </div>    
+
+    <div class="form-group col-md-4">
+      <label for="inputState">State</label>
+      <select [(ngModel)]="order.info.state"  required ngModel #state="ngModel" name="state" id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option value="cairo">Cairo</option>
+    	<option value="alexandria">Alexandria</option>
+		<option value="fayoum">Fayoum</option>
+		<option value="menufia">Menufia</option>
+		<option value="gizaa">Gizaa</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip Code</label>
+      <input [(ngModel)]="order.info.zipCode" minlength="10" required ngModel #zipCode="ngModel" name="zipCode" type="number" class="form-control" id="inputZip">
+    </div>
+
+	<div class="row no-gutters" style="width:100%">
+    <div *ngIf="city.touched && !city.valid" style="width: 49%;
+    margin-right: 2%;">
+		<div *ngIf="city.errors.required" class="alert alert-danger" role="alert">
+		  This Field Is Required
+		</div>
+
+		<div *ngIf="city.errors.minlength" class="alert alert-danger" role="alert">
+		  This Field Require {{city.errors.minlength.requiredLength - city.errors.minlength.actualLength}}
+		</div>
+	</div>
+
+	<div *ngIf="state.touched && !state.valid" style="width: 32%;">
+		<div *ngIf="state.errors.required" class="alert alert-danger" role="alert">
+		  This Field Is Required
+		</div>
+
+		<div *ngIf="state.errors.minlength" class="alert alert-danger" role="alert">
+		  This Field Require {{state.errors.minlength.requiredLength - state.errors.minlength.actualLength}}
+		</div>
+	</div>
+
+    <div *ngIf="zipCode.touched && !zipCode.valid">
+		<div *ngIf="zipCode.errors.required" class="alert alert-danger" role="alert">
+		  Zip Field Is Required
+		</div>
+
+		<div *ngIf="zipCode.errors.minlength" class="alert alert-danger" role="alert">
+		  Zip Field Require {{zipCode.errors.minlength.requiredLength - zipCode.errors.minlength.actualLength}}
+		</div>
+	</div>
+	</div>
+
+  </div>
+ 
+  <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
+ 	 Modifiy And Save
+  </button>
+
+  <button type="button" class="btn btn-danger" *ngIf="userId && orderId" (click)="deleteOrder()">
+  	Delete Order
+  </button>
+
+  <a routerLink="/admin/orders" class="btn btn-secondary">Cancel</a>
+
+</form>
+</div>

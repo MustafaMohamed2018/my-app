@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col" style="width:5%">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Date Created</th>
+      <th scope="col">last Modified</th>
+      <th scope="col">Modified By</th>
+      <th scope="col">Edit</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let order of ordersArray;index as i">
+      <th scope="row" style="width:5%">{{i + 1}}</th>
+      <td>{{order.info.fullName}}</td>
+      <td>{{order.date}}</td>
+      <td *ngIf="order.dateModified;else dateTemplate">{{order.dateModified}}</td>
+      <ng-template #dateTemplate><td>-</td></ng-template>
+      <td *ngIf="order.modifier;else modifierTemplate">{{order.modifier}}</td>
+      <ng-template #modifierTemplate><td>-</td></ng-template>
+      <td><a class="btn btn-primary" [routerLink]="['/my-orders/', order.userId, order.orderKey]">Edit</a></td>
+    </tr>
+  </tbody>
+
+</table>

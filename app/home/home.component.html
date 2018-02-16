@@ -1,0 +1,50 @@
+<div class="row">
+	<div class="col-3 ">
+		<div class="sticky-top">
+			<div class="search-div">
+				  <form class="form-inline">
+					  <div class="form-group w-100">
+					    <input ngModel name="search" #search="ngModel" #search (keyup)="searchProduct(search.value)" type="text" class="w-100 form-control" id="search" placeholder="Search For Product">
+					  </div>
+	  				</form>
+				</div>
+			<ul class="list-group">
+			  <li class="list-group-item  main-category" [class.active]="!categoryUrl">
+					<a class="nav-link" routerLink="/"> All </a>
+			  </li>
+			  <li class=" list-group-item main-category" [class.active]="categoryUrl == category.key" *ngFor="let category of categories">
+  				<a routerLink="/" [queryParams]="{ categoryUrl: category.key}"  class="nav-link">
+  					{{category.name}}
+  				</a>
+			  </li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-9">
+			<div class="row">
+			<ng-container *ngFor ="let product of filteredproductsArray;index as i">
+				<div class="col-6 card-container">
+					<div class="card" >
+					  <img class="card-img-top" *ngIf="product.imageUrl" [src]="product.imageUrl" alt="Card image cap">
+					  <div class="card-body">
+					    <h3 [class.text-capitalize]="active" class="card-title" [innerHTML]="product.title  | highlight : search.value"></h3>
+					    <span class="btn btn-outline-info" (click)="toggle[i] = !toggle[i]">Product Info</span>
+					    <div class="info-div-hide" [ngClass]="toggle[i] ? 'info-div-show': 'info-div-hide'">
+					    	<h5 class=" card-title ">Price {{product.price | currency:'USD'}}</h5>
+					    	<p class=" text-capitalize card-text">{{product.description}}</p>
+					  	</div>
+					  </div>
+
+					  <div class="card-footer">
+						<product-quantity [shoppingCard]="shoppingCard" [product]="product"></product-quantity>
+    				  </div>
+
+					</div>
+				</div>
+				<div class="w-100" *ngIf=" (i +1) %2 === 0 "></div>
+			</ng-container>
+		</div>
+	</div>
+</div>
+
+

@@ -1,0 +1,23 @@
+<a class="btn add-category btn-primary" routerLink="/admin/catrgories/">Back</a>
+
+<form #form="ngForm" (ngSubmit)="addCategory(form.value)">
+  <div class="form-group">
+    <label for="category">Add Main Category</label>
+    <input ngModel #category="ngModel" name="category" required minlength="5" [(ngModel)]="categoryId" type="email" class="form-control" id="category" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">This Will Be Parent Category</small>
+  </div>
+
+  <div *ngIf="category.touched && !category.valid">
+      <div *ngIf="category.errors.required" class="alert alert-danger" role="alert">
+        This Field Is Required
+      </div>
+
+      <div *ngIf="category.errors.minlength" class="alert alert-danger" role="alert">
+        This Field Require {{category.errors.minlength.requiredLength - category.errors.minlength.actualLength}}
+      </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" *ngIf="form.valid">Add Category Or Update</button>
+  <span class="btn btn-danger" *ngIf="categoryId" (click)="deleteCategory()">Remove Category</span>
+  <a class="btn btn-primary"  routerLink="/admin/catrgories/">Cancel</a>
+</form>

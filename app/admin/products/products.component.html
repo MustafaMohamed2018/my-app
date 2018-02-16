@@ -1,0 +1,27 @@
+<a class="btn btn-primary" routerLink="/admin/products/product-form">Add Product</a>
+<div class="col-9 " style="margin:auto">
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th scope="col" class="font-big">#</th>
+	      <th scope="col" class="font-big">Title</th>
+	      <th scope="col" class="font-big">Price</th>
+	      <th scope="col" class="font-big">Edit</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	<ng-container *ngFor ="let product of productsArray;index as i">
+		  	<tr>
+		      <th scope="row" style="font-size:19px">{{i+1}}</th>
+		      <td class="text-capitalize" style="font-size:19px">{{product.title}}</td>
+		      <td style="font-size:19px">{{product.price}}</td>
+		      <td style="font-size:19px">
+		      	<a class="btn btn-primary" [routerLink]="['/admin/products/product-form', product.key]">Edit This Product</a>
+		      </td>
+		    </tr>
+	  	</ng-container>
+	  </tbody>
+	</table>
+</div>
+
+

@@ -1,0 +1,103 @@
+<a class="btn btn-primary" routerLink="/admin/products/">Back</a>
+<div class="row">
+	<div class="col-6">
+		<form #form="ngForm" (ngSubmit)="addProduct(form)">
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">Title</span>
+			  </div>
+			  <input type="text" class="form-control" #productTitle="ngModel" placeholder="Product Title" aria-label="Username" aria-describedby="basic-addon1" name="title" ngModel [(ngModel)]="product.title" required minlength="5">
+			</div>
+
+			<div *ngIf="productTitle.touched && !productTitle.valid">
+				<div *ngIf="productTitle.errors.required" class="alert alert-danger" role="alert">
+				  This Field Is Required
+				</div>
+
+				<div *ngIf="productTitle.errors.minlength" class="alert alert-danger" role="alert">
+				  This Field Require {{productTitle.errors.minlength.requiredLength - productTitle.errors.minlength.actualLength}}
+				</div>
+			</div>
+
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">Price</span>
+			  </div>
+			  <input #price="ngModel" required minlength="1" type="number" ngModel [(ngModel)]="product.price" name="price" class="form-control" placeholder="Product Price" aria-label="Username" aria-describedby="basic-addon1">
+			</div>
+
+			<div *ngIf="price.touched && !price.valid">
+				<div *ngIf="price.errors.required" class="alert alert-danger" role="alert">
+				  This Field Is Required
+				</div>
+
+				<div *ngIf="price.errors.minlength" class="alert alert-danger" role="alert">
+				  This Field Require {{price.errors.minlength.requiredLength - price.errors.minlength.actualLength}}
+				</div>
+			</div>
+
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <label class="input-group-text" for="inputGroupSelect01">Category</label>
+			  </div>
+			  <select #category="ngModel" required ngModel name="category" [(ngModel)]="product.category" class="custom-select" id="inputGroupSelect01">   
+			 	<option class="capital" *ngFor="let category of categories | async" [value]="category.name">
+			 		{{category.key}}
+			 	</option>
+			  </select>
+			</div>
+			
+			<div *ngIf="category.touched && !category.valid">
+				<div *ngIf="category.errors.required" class="alert alert-danger" role="alert">
+				  This Field Is Required
+				</div>
+			</div>
+
+			<div class="form-group">
+			    <label for="exampleFormControlTextarea1">Product Description</label>
+			    <textarea required minlength="20" #description="ngModel" name="description" ngModel [(ngModel)]="product.description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+			</div>
+
+			<div *ngIf="description.touched && !description.valid">
+				<div *ngIf="description.errors.required" class="alert alert-danger" role="alert">
+				  This Field Is Required
+				</div>
+
+				<div *ngIf="description.errors.minlength" class="alert alert-danger" role="alert">
+				  This Field Require {{description.errors.minlength.requiredLength - description.errors.minlength.actualLength}}
+				</div>
+			</div>
+			
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">Image Url</span>
+			  </div>
+			  <input required minlength="10" #imageUrl="ngModel" type="Url" class="form-control" placeholder="Image Url" aria-label="imageUrl" aria-describedby="basic-addon1" name="imageUrl" ngModel [(ngModel)]="product.imageUrl" >
+			</div>
+
+			<div *ngIf="imageUrl.touched && !imageUrl.valid">
+				<div *ngIf="imageUrl.errors.required" class="alert alert-danger" role="alert">
+				  This Field Is Required
+				</div>
+
+				<div *ngIf="imageUrl.errors.minlength" class="alert alert-danger" role="alert">
+				  This Field Require {{imageUrl.errors.minlength.requiredLength - imageUrl.errors.minlength.actualLength}}
+				</div>
+			</div>
+			<button [disabled]="form.invalid" dis class="btn btn-primary">Add Or Update Product</button>
+			<button type="button" class="btn btn-danger" *ngIf="productId" (click)="deletProduct()">Delete Product</button>
+			<a class="btn btn-primary" routerLink="/admin/products/">Cancel</a>
+		</form>
+	</div>
+	
+	<div class="col-6">
+		<div class="card" style="width: 18rem;">
+		  <img class="card-img-top" *ngIf="product.imageUrl" [src]="product.imageUrl" alt="Card image cap">
+		  <div class="card-body">
+		    <h3 class="card-title">{{product.title}}</h3>
+		    <h5 class="card-title">{{product.price}}</h5>
+		    <p class="card-text">{{product.description}}</p>
+		  </div>
+		</div>
+	</div>
+</div>

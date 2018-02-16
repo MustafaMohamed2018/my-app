@@ -1,0 +1,15 @@
+.admin-dropdown{
+	cursor: pointer;
+}
+
+.totalQuantity{
+	line-height: 2.5;
+}
+.totalQuantity .btn{
+	padding:0;
+   width: 56px;
+}
+
+.badge-warning{
+   margin-left: 20%;
+}

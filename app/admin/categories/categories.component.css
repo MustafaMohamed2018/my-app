@@ -1,0 +1,44 @@
+.add-category{
+	 margin-left: 43%;
+
+}
+
+.list-group-item{
+    margin-left: 37px;
+    margin-bottom: 10px;
+    width: 92%;
+    background-color: #a3d9ef;
+}
+
+.list-head{
+	list-style: none
+}
+
+.list-head .bg-primary{
+	border-radius: 8px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.main-div{
+	margin: auto;
+}
+
+.span-info{
+	width:25%;
+	display: inline-block;
+	text-transform: capitalize;
+    font-size: 21px;
+    font-weight: bold;
+    color:white;
+ }
+
+.edit-link{
+	    margin-left: 61%;
+}
+
+.category-div{
+	font-weight: bold;
+    font-size: 21px;
+    text-transform: capitalize;
+}

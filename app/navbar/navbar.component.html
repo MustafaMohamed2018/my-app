@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" routerLink="/">My Shop</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+          <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <ng-template #login>
+       <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+      </ng-template>
+       <li ngbDropdown  class="nav-item  dropdown" *ngIf="user | async as userInfo else login">
+          <a class="nav-link admin-dropdown dropdown-toggle" ngbDropdownToggle  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{userInfo.userName}}
+          </a>
+          <div ngbDropdownMenu  class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/admin/products" *ngIf="userInfo.isAdmin">Admin Products</a>
+            <a class="dropdown-item" routerLink="/admin/catrgories" *ngIf="userInfo.isAdmin">Admin Categories</a>
+            <a class="dropdown-item" routerLink="/admin/orders" *ngIf="userInfo.isAdmin">Admin Orders</a>
+            <a class="dropdown-item" routerLink="/my-orders" *ngIf="!userInfo.isAdmin">My Orders</a>
+            <a class="dropdown-item" (click)="logout()">Logout</a>
+          </div>
+      </li>
+      <li class="nav-item active totalQuantity">
+        <a class="btn btn-secondary" routerLink="/shopping-card">
+          <fa [name]="'shopping-cart'"  [size]=1></fa>
+           <span class="badge badge-warning">{{totalQuantity}}</span>
+        </a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>

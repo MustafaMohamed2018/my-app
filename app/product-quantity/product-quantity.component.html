@@ -1,0 +1,11 @@
+<div class="row no-gutters" *ngIf="productQuantity == 0; else quantityTemplate">
+	<button class="btn btn-secondary col" (click)="addProduct(product)">Add</button>
+</div>
+
+<ng-template #quantityTemplate>
+	<div class="row no-gutters">
+		<button class="btn btn-secondary col-2" (click)="removeProduct(product)">-</button>
+		<div  [innerHTML]="productQuantity" class="col text-center"></div>
+		<button class="btn btn-secondary col-2" (click)="addProduct(product)">+</button>
+	</div>
+</ng-template>

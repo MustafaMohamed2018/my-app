@@ -1,0 +1,41 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col" style="width: 8%">#</th>
+      <th scope="col" class="font-italic" style="width: 22%">Product Name</th>
+      <th scope="col" class="text-center shopping-head">Quantity</th>
+      <th scope="col" style="width: 31%" class="text-center">Price</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let product of shoppingCardArray">
+    <tr>
+      <th scope="row" style="width: 8%">1</th>
+      <td style="width: 22%" class="text-capitalize font-italic"> {{product.title}}</td>
+      <td scope="col" class="text-center shopping">
+      		<product-quantity [shoppingCard]="shoppingCard" [product]="product" ></product-quantity>
+      </td>
+      <td scope="col" class="text-center font-weight-bold" style="width: 31%">{{product.price * product.quantity | currency:'USD'}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+  	<tr>
+    	<th style="width: 8%"></th>
+    	<th style="width: 22%"></th>
+    	<th></th>
+    	<th style="width: 31%" class=" font-italic text-center">
+    		<h4><span class="badge badge-info">{{totalPrice | currency:'USD'}}</span></h4>
+		</th>
+    	<!-->
+    		<th style="width: 31%" class=" font-italic">{{totalPrice | currency:'USD'}}</th>
+    	<-->
+    </tr>
+  </tfoot>
+</table>
+
+<button type="button" class="btn btn-danger" (click)="clearCard()">Clear Card</button>
+<a routerLink="/order" class="btn btn-primary" *ngIf="!isAdmin">Order Products</a>
+
+<div style="margin-left: 2%; margin-top: 14px"  class="alert col-6 alert-danger text-capitalize" role="alert" *ngIf="isAdmin">
+    the admin cannot make orders!
+</div>
+

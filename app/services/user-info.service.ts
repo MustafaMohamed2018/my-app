@@ -23,7 +23,7 @@ export class UserInfoService {
 
   get appUser(){
   	return this.authService.appUserObser.switchMap( user =>{
-      this.userId = user.uid;
+      if(user) this.userId = user.uid;
   		if(user) return this.getUserInfo(user.uid);
 
   		return Observable.of('');

@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit,OnDestroy {
   user;
   totalQuantity:number;
   cardSubscription:Subscription;
+ public isCollapsed = false;
 
   constructor(
     private authService:AuthService,

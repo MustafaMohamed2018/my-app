@@ -23,7 +23,7 @@ categoryUrl;
 quantity:number;
 shoppingCard;
 cardSubscription:Subscription;
-
+ public isCollapsed = false;
   constructor(private categoryService:CategoryService,
    private productsService:ProductsService,
    private route:ActivatedRoute,
